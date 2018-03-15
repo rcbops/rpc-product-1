@@ -2,9 +2,26 @@
 
 set -xeu
 
+echo "Installing dependencies ..."
+apt-get update
+apt-get install -y python-git
+
 echo "Cloning components ..."
-git clone https://github.com/mattt416/rpc-component-1 /opt/rpc-component-1
-git clone https://github.com/mattt416/rpc-component-2 /opt/rpc-component-2
+python << END
+import sys
+import yaml
+
+import git
+
+
+stream = file('required_components.yml', 'r')
+components = yaml.load(stream)
+
+for component in components:
+    clone_dir = '/opt/%s' % component['name']
+    print('Cloning %s to %s ...' % (component['name'], clone_dir))
+    git.Repo.clone_from(component['repo'], clone_dir, branch=component['required_release'])
+END
 
 echo "Deploying components ..."
 /opt/rpc-component-1/gating/pre_merge_test/run

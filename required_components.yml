@@ -1,0 +1,8 @@
+---
+- name: rpc-component-1
+  repo: https://github.com/mattt416/rpc-component-1
+  required_release: master
+
+- name: rpc-component-2
+  repo: https://github.com/mattt416/rpc-component-2
+  required_release: master
