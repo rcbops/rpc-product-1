@@ -1,8 +1,11 @@
 #!/bin/bash
 
-cd /opt
-git clone https://github.com/mattt416/rpc-component-1
-git clone https://github.com/mattt416/rpc-component-2
+set -xeu
 
-./rpc-component-1/gating/pre_merge_test/run
-./rpc-component-2/gating/pre_merge_test/run
+echo "Cloning components ..."
+git clone https://github.com/mattt416/rpc-component-1 /opt/rpc-component-1
+git clone https://github.com/mattt416/rpc-component-2 /opt/rpc-component-2
+
+echo "Deploying components ..."
+/opt/rpc-component-1/gating/pre_merge_test/run
+/opt/rpc-component-2/gating/pre_merge_test/run

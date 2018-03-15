@@ -1,4 +1,19 @@
 #!/bin/bash
 
-test -f /tmp/rpc-component-1
-test -f /tmp/rpc-component-2
+set -xeu
+
+RC=0
+
+echo "Testing rpc-product-1 ..."
+
+if [[ ! -f /tmp/rpc-component-1 ]]; then
+    RC=1
+    echo "rpc-component-1 was not deployed correctly"
+fi
+
+if [[ ! -f /tmp/rpc-component-2 ]]; then
+    RC=1
+    echo "rpc-component-2 was not deployed correctly"
+fi
+
+exit ${RC}
