@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd /opt
+git clone https://github.com/mattt416/rpc-component-1
+git clone https://github.com/mattt416/rpc-component-2
+
+./rpc-component-1/gating/pre_merge_test/run
+./rpc-component-2/gating/pre_merge_test/run

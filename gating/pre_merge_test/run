@@ -1,0 +1,4 @@
+#!/bin/bash
+
+test -f /tmp/rpc-component-1
+test -f /tmp/rpc-component-2
