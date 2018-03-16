@@ -20,7 +20,7 @@ components = yaml.load(stream)
 for component in components:
     clone_dir = '/opt/%s' % component['name']
     print('Cloning %s to %s ...' % (component['name'], clone_dir))
-    git.Repo.clone_from(component['repo'], clone_dir, branch=component['required_release'])
+    git.Repo.clone_from(component['repo'], clone_dir, branch=component['version'])
 END
 
 echo "Deploying components ..."
