@@ -14,13 +14,20 @@ import yaml
 import git
 
 
-stream = file('required_components.yml', 'r')
-components = yaml.load(stream)
+dep_metadata = yaml.safe_load(open('component_metadata.yml').read())
 
-for component in components:
-    clone_dir = '/opt/%s' % component['name']
-    print('Cloning %s to %s ...' % (component['name'], clone_dir))
-    git.Repo.clone_from(component['repo'], clone_dir, branch=component['version'])
+# Grab top level metadata repo, this is necessary to obtain component repo URLs
+git.Repo.clone_from(
+    'https://github.com/mattt416/rpc-metadata',
+    '/opt/rpc-metadata'
+)
+
+for dep in dep_metadata['dependencies']:
+    component_metadata = yaml.safe_load(open('/opt/rpc-metadata/%s.yml' % dep['name']).read())
+    clone_dir = '/opt/%s' % dep['name']
+    print('Cloning %s to %s ...' % (dep['name'], clone_dir))
+    repo = git.Repo.clone_from(component_metadata['repo'], clone_dir)
+    repo.git.checkout(dep['sha'])
 END
 
 echo "Deploying components ..."

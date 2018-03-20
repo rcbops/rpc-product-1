@@ -1,12 +1,10 @@
 ---
 dependencies:
   - name: rpc-component-1
-    repo: https://github.com/mattt416/rpc-component-1
     update_constraints:
       - 'version<2'
     sha: '5773026bea0bd72f8920b7e4f0e13e88b368cd55' # version 1.0.0
   - name: rpc-component-2
-    repo: https://github.com/mattt416/rpc-component-2
     update_constraints:
       - 'version<2'
     sha: '459082a722c40003758899b1b29c24cc19df6568' # version 1.0.0
