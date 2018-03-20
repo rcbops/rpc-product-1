@@ -3,8 +3,8 @@ dependencies:
   - name: rpc-component-1
     update_constraints:
       - 'version<2'
-    sha: '5773026bea0bd72f8920b7e4f0e13e88b368cd55' # version 1.0.0
+    sha: '459082a722c40003758899b1b29c24cc19df6568' # version 1.1.0
   - name: rpc-component-2
     update_constraints:
       - 'version<2'
-    sha: '459082a722c40003758899b1b29c24cc19df6568' # version 1.0.0
+    sha: 'ed18fd1f7c8bc0db3148ea39a6500cc8f8abb2b6' # version 1.1.0
