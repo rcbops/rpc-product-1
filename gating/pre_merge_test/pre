@@ -4,31 +4,39 @@ set -xeu
 
 echo "Installing dependencies ..."
 apt-get update
-apt-get install -y python-git
+#apt-get install -y python-git
 
-echo "Cloning components ..."
-python << END
-import sys
-import yaml
+#echo "Cloning components ..."
+#python << END
+#import sys
+#import yaml
+#
+#import git
+#
+#
+#dep_metadata = yaml.safe_load(open('component_metadata.yml').read())
+#
+## Grab top level metadata repo, this is necessary to obtain component repo URLs
+#git.Repo.clone_from(
+#    'https://github.com/mattt416/rpc-metadata',
+#    '/opt/rpc-metadata'
+#)
+#
+#for dep in dep_metadata['dependencies']:
+#    component_metadata = yaml.safe_load(open('/opt/rpc-metadata/%s.yml' % dep['name']).read())
+#    clone_dir = '/opt/%s' % dep['name']
+#    print('Cloning %s to %s ...' % (dep['name'], clone_dir))
+#    repo = git.Repo.clone_from(component_metadata['repo'], clone_dir)
+#    repo.git.checkout(dep['sha'])
+#END
 
-import git
-
-
-dep_metadata = yaml.safe_load(open('component_metadata.yml').read())
-
-# Grab top level metadata repo, this is necessary to obtain component repo URLs
-git.Repo.clone_from(
-    'https://github.com/mattt416/rpc-metadata',
-    '/opt/rpc-metadata'
-)
-
-for dep in dep_metadata['dependencies']:
-    component_metadata = yaml.safe_load(open('/opt/rpc-metadata/%s.yml' % dep['name']).read())
-    clone_dir = '/opt/%s' % dep['name']
-    print('Cloning %s to %s ...' % (dep['name'], clone_dir))
-    repo = git.Repo.clone_from(component_metadata['repo'], clone_dir)
-    repo.git.checkout(dep['sha'])
-END
+# Until https://github.com/mattt416/rpc-metadata/pull/1, we need to pull down a WIP branch
+git clone https://github.com/mattt416/rpc-metadata/ -b RE-1371/master/0 /opt/rpc-metadata
+pushd /opt/rpc-metadata
+  # All repos exist on mattt416 for now
+  sed -i -e 's/rcbops/mattt416/g' scripts/lib/schemata.py
+  python scripts/dependencies.py --releases-repo=. --dependency-dir=../rpc-product-1/ download-requirements --download-dir /opt/
+popd
 
 echo "Deploying components ..."
 /opt/rpc-component-1/gating/pre_merge_test/run
