@@ -1,10 +1,7 @@
----
 dependencies:
-  - name: rpc-component-1
-    update_constraints:
-      - 'version<2'
-    sha: '540464d96be5cbbdf1cf07ae5457dd57b159c110' # version 1.1.0
-  - name: rpc-component-2
-    update_constraints:
-      - 'version<2'
-    sha: 'ed18fd1f7c8bc0db3148ea39a6500cc8f8abb2b6' # version 1.1.0
+- constraints:
+  - version<r2.0.0
+  name: rpc-component-1
+- constraints:
+  - version<r2.0.0
+  name: rpc-component-2
