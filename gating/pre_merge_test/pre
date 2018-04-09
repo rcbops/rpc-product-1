@@ -5,6 +5,7 @@ set -xeu
 echo "Installing dependencies ..."
 apt-get update
 #apt-get install -y python-git
+apt-get install -y python-pip python-virtualenv
 
 #echo "Cloning components ..."
 #python << END
@@ -31,12 +32,21 @@ apt-get update
 #END
 
 # Until https://github.com/mattt416/rpc-metadata/pull/1, we need to pull down a WIP branch
-git clone https://github.com/mattt416/rpc-metadata/ -b RE-1371/master/0 /opt/rpc-metadata
+git clone https://github.com/mattt416/rpc-metadata/ /opt/rpc-metadata
 pushd /opt/rpc-metadata
-  # All repos exist on mattt416 for now
-  sed -i -e 's/rcbops/mattt416/g' scripts/lib/schemata.py
-  python scripts/dependencies.py --releases-repo=. --dependency-dir=../rpc-product-1/ download-requirements --download-dir /opt/
+  virtualenv --python=python3 .venv
+  set +u
+  source .venv/bin/activate
+  set -u
+  pip install -c constraints.txt -r requirements.txt
+  pushd rpc_component
+    pip install .
+  popd
 popd
+
+component dependency download-requirements --download-dir /opt
+
+deactivate
 
 echo "Deploying components ..."
 /opt/rpc-component-1/gating/pre_merge_test/run
