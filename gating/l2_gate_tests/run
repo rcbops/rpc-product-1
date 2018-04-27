@@ -18,6 +18,6 @@ export DEPLOY_AIO="true"
 
 echo "rpc-product-1 at SHA $(git rev-parse HEAD)"
 echo "rpc-product-1 l2_gate_tests running..."
-
+sleep 10
 echo "rpc-product-1 l2_gate_tests completed."
 
