@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -xeu
+
+mkdir ${RE_HOOK_RESULT_DIR}
+cp tempest_results.xml ${RE_HOOK_RESULT_DIR}
+cp tempest_results-2.xml ${RE_HOOK_RESULT_DIR}
