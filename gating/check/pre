@@ -19,29 +19,25 @@ apt-get install -y python-pip python-virtualenv
 #
 ## Grab top level metadata repo, this is necessary to obtain component repo URLs
 #git.Repo.clone_from(
-#    'https://github.com/mattt416/rpc-metadata',
-#    '/opt/rpc-metadata'
+#    'https://github.com/rcbops/releases',
+#    '/opt/releases'
 #)
 #
 #for dep in dep_metadata['dependencies']:
-#    component_metadata = yaml.safe_load(open('/opt/rpc-metadata/%s.yml' % dep['name']).read())
+#    component_metadata = yaml.safe_load(open('/opt/releases/%s.yml' % dep['name']).read())
 #    clone_dir = '/opt/%s' % dep['name']
 #    print('Cloning %s to %s ...' % (dep['name'], clone_dir))
 #    repo = git.Repo.clone_from(component_metadata['repo'], clone_dir)
 #    repo.git.checkout(dep['sha'])
 #END
 
-# Until https://github.com/mattt416/rpc-metadata/pull/1, we need to pull down a WIP branch
-git clone https://github.com/mattt416/rpc-metadata/ /opt/rpc-metadata
-pushd /opt/rpc-metadata
+git clone https://github.com/rcbops/rpc_component/
+pushd rpc_component
   virtualenv --python=python3 .venv
   set +u
   source .venv/bin/activate
   set -u
-  pip install -c constraints.txt -r requirements.txt
-  pushd rpc_component
-    pip install .
-  popd
+  pip install .
 popd
 
 component dependency download-requirements --download-dir /opt
@@ -49,5 +45,5 @@ component dependency download-requirements --download-dir /opt
 deactivate
 
 echo "Deploying components ..."
-/opt/rpc-component-1/gating/pre_merge_test/run
-/opt/rpc-component-2/gating/pre_merge_test/run
+/opt/rpc-component-1/gating/check/run
+/opt/rpc-component-2/gating/check/run
