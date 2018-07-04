@@ -7,7 +7,7 @@
 
 # post is an optional executable that is the last stage to run. It is used to
 # perform actions that make use of the data generated. Such actions include log
-# aggregation and preparing the node to be used as an image. 
+# aggregation and preparing the node to be used as an image.
 
 # Environment variables
 # READ_ONLY_TEST: When set to false a pull request is created to update any
