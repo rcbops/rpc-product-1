@@ -7,8 +7,8 @@ dependencies:
   sha: 7a0b674ad92aa0e63f185a1aaa7830c584b9c123
   version: 1.0.1
 - name: rpc-component-2
-  ref: 1.0.1
+  ref: 1.0.2
   ref_type: tag
   repo_url: https://github.com/mattt416/rpc-component-2
-  sha: 7646f1d0ef46b997fa976efb1faa99c47b2e6cb4
-  version: 1.0.1
+  sha: 8fdcb3e99a71e1eeb0014484bb6492078402e563
+  version: 1.0.2
