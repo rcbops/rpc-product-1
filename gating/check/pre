@@ -4,32 +4,7 @@ set -xeu
 
 echo "Installing dependencies ..."
 apt-get update
-#apt-get install -y python-git
 apt-get install -y python-pip python-virtualenv
-
-#echo "Cloning components ..."
-#python << END
-#import sys
-#import yaml
-#
-#import git
-#
-#
-#dep_metadata = yaml.safe_load(open('component_metadata.yml').read())
-#
-## Grab top level metadata repo, this is necessary to obtain component repo URLs
-#git.Repo.clone_from(
-#    'https://github.com/rcbops/releases',
-#    '/opt/releases'
-#)
-#
-#for dep in dep_metadata['dependencies']:
-#    component_metadata = yaml.safe_load(open('/opt/releases/%s.yml' % dep['name']).read())
-#    clone_dir = '/opt/%s' % dep['name']
-#    print('Cloning %s to %s ...' % (dep['name'], clone_dir))
-#    repo = git.Repo.clone_from(component_metadata['repo'], clone_dir)
-#    repo.git.checkout(dep['sha'])
-#END
 
 git clone https://github.com/rcbops/rpc_component/
 pushd rpc_component
