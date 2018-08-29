@@ -3,12 +3,12 @@ dependencies:
 - name: rpc-component-1
   ref: 1.0.1
   ref_type: tag
-  repo_url: https://github.com/mattt416/rpc-component-1
+  repo_url: https://github.com/rcbops/rpc-component-1
   sha: 7a0b674ad92aa0e63f185a1aaa7830c584b9c123
   version: 1.0.1
 - name: rpc-component-2
   ref: 1.0.3
   ref_type: tag
-  repo_url: https://github.com/mattt416/rpc-component-2
+  repo_url: https://github.com/rcbops/rpc-component-2
   sha: 609ed5fe2ec6b6f88c540374917e84c2c43cf9c8
   version: 1.0.3
