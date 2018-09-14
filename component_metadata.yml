@@ -5,3 +5,4 @@ dependencies:
 - constraints:
   - version<r2.0.0
   name: rpc-component-2
+foo: "bar"
